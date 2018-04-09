@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +33,19 @@ public class TStoreController {
 		return this.tStoreService.findById(storeId);
 	}
 	
+	@PostMapping
+	public TStore insertStore(@RequestBody TStore tStore) {
+		return this.tStoreService.insertStore(tStore);
+	}
+	
+	@DeleteMapping("/{storeId}")
+	public void deleteStore(@PathVariable Integer storeId) {
+		this.tStoreService.deleteStore(storeId);
+	}
+	
+	@PutMapping("/{storeId}")
+	public TStore updateStore(@RequestBody TStore tStore, @PathVariable Integer storeId) {
+		return tStoreService.updateStore(tStore);
+	}
 	
 }

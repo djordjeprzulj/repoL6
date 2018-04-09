@@ -23,5 +23,23 @@ public class TStoreService {
 		return this.tStoreRepository.findById(id);
 	}
 	
+	public TStore insertStore(TStore tStore) {
+		if (!this.tStoreRepository.existsById(tStore.getId()))
+			return this.tStoreRepository.save(tStore);
+		else
+			return null;
+	}
 
+	public void deleteStore(Integer storeId) {
+		Optional<TStore> opt = this.tStoreRepository.findById(storeId);
+		if (opt.isPresent())
+			this.tStoreRepository.delete(opt.get());		
+	}
+
+	public TStore updateStore(TStore tStore) {
+		Optional<TStore> opt = this.tStoreRepository.findById(tStore.getId());
+		if (opt.isPresent())
+			this.tStoreRepository.save(tStore);
+		return opt.get();
+	}
 }
